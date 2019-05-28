@@ -76,13 +76,13 @@ public:
 		switch(flag)
 		{
 		case 1:
-			return new Pistol1();break;
+			return new Sniper1();break;
 		case 2:
-			return new Pistol2();break;
+			return new Sniper2();break;
 		case 3:
-			return new Pistol3();break;
+			return new Sniper3();break;
 		case 4:
-			return new Pistol4();break;
+			return new Sniper4();break;
 		}
 	}
 	~SniperWeaponStore(){}
@@ -92,13 +92,13 @@ public:
     void Show(){
         std::cout << "1.Pistol\t2.Showgun\t3.Sniper";
     }
-    WeaponStore *CreatWeaponStore(string name)
+    WeaponStore *CreatWeaponStore(int name)
 	{
-		if(name=="Pistol"||"1")
+		if(name==1)
             return new PistolWeaponStore();
-        if(name=="Shotgun"||"2")
+        if(name==2)
 			return new ShotgunWeaponStore();
-		if(name=="Sniper"||"3")
+		if(name==3)
 			return new SniperWeaponStore();
     }
     ~StoreManager();

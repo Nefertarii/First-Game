@@ -61,20 +61,45 @@ public:
 class Shotgun2:public Weapon{
 public:
 	Shotgun2(int price = 100, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'C', std::string name = "Shotgun2") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	        char rank = 'B', std::string name = "Shotgun2") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
 	~Shotgun2(){}
 };
 class Shotgun3:public Weapon{
 public:
 	Shotgun3(int price = 100, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'C', std::string name = "Shotgun3") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	        char rank = 'A', std::string name = "Shotgun3") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
 	~Shotgun3(){}
 };
 class Shotgun4:public Weapon{
 public:
 	Shotgun4(int price = 100, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'C', std::string name = "Shotgun4") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	        char rank = 'S', std::string name = "Shotgun4") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
 	~Shotgun4(){}
 };
+class Sniper1:public Weapon{
+public:
+	Sniper1(int price = 200, int atk = 10, int ammo = 50,int now_ammo = 50,
+	        char rank = 'C', std::string name = "Sniper1") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Sniper1(){}
+};
+class Sniper2:public Weapon{
+public:
+	Sniper2(int price = 300, int atk = 10, int ammo = 50,int now_ammo = 50,
+	        char rank = 'B', std::string name = "Sniper2") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Sniper2(){}
+};
+class Sniper3:public Weapon{
+public:
+	Sniper3(int price = 500, int atk = 10, int ammo = 50,int now_ammo = 50,
+	        char rank = 'A', std::string name = "Sniper3") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Sniper3(){}
+};
+class Sniper4:public Weapon{
+public:
+	Sniper4(int price = 1000, int atk = 10, int ammo = 50,int now_ammo = 50,
+	        char rank = 'S', std::string name = "Sniper4") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Sniper4(){}
+};
+
 
 #endif
