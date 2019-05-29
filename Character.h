@@ -47,7 +47,6 @@ public:
 		cout << "Health: " << Health << "\tAttack: " << ATK;
 	}
 	void TakeAttack(int Damage){
-		if(Damage>DEF)
 			Health -= Damage;
 		if(Health<0)
 			Health=0;
@@ -89,6 +88,7 @@ public:
 			return new Criminal();
 			break;
 		}
+		return 0;
 	}
 };
 
@@ -140,6 +140,7 @@ public:
 			return new Gun_Nut();
 			break;
 		}
+		return 0;
 	}
 };
 

@@ -105,19 +105,19 @@ public:
 class PilotGun:public Weapon{//sn
 public:
 	PilotGun(int price = 0, int atk = 5, int ammo = 6,int now_ammo = 6,
-	        char rank = 'N', std::string name = "Pilot") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	        char rank = 'N', std::string name = "Rogue Special") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
 	~PilotGun(){}
 };
 class HunterGun:public Weapon{//sn
 public:
 	HunterGun(int price = 0, int atk = 5, int ammo = 8,int now_ammo = 8,
-	        char rank = 'N', std::string name = "Hunter") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	        char rank = 'N', std::string name = "Rusty Sidearm") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
 	~HunterGun(){}
 };
 class CriminalGun:public Weapon{//sn
 public:
 	CriminalGun(int price = 0, int atk = 5, int ammo = 10,int now_ammo = 10,
-	        char rank = 'N', std::string name = "Criminal") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	        char rank = 'N', std::string name = "Budget Revolver") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
 	~CriminalGun(){}
 };
 

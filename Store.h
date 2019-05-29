@@ -10,6 +10,7 @@ public:
 	virtual Weapon *CreatWeapon(int flag)=0;		//创建武器
 	virtual ~WeaponStore(){}
 };
+
 class PistolWeaponStore:public WeaponStore{
 public:
 	void Show()
@@ -32,6 +33,7 @@ public:
 		case 4:
 			return new Dungeon_Eagle();break;
 		}
+		return 0;
 	}
 	~PistolWeaponStore(){}
 };
@@ -58,6 +60,7 @@ public:
 		case 4:
 			return new Big_Shotgun();break;
 		}
+		return 0;
 	}
 	~ShotgunWeaponStore(){}
 };
@@ -84,6 +87,7 @@ public:
 		case 4:
 			return new Railgun();break;
 		}
+		return 0;
 	}
 	~SniperWeaponStore(){}
 };
@@ -95,13 +99,14 @@ public:
 	{
 		switch(flag)
 		{
-		case 1:
-			return new PilotGun();break;
-		case 2:
-			return new HunterGun();break;
-		case 3:
-			return new CriminalGun();break;
+		case 1:{
+			return new PilotGun();break;}
+		case 2:{
+			return new HunterGun();break;}
+		case 3:{
+			return new CriminalGun();break;}
 		}
+		return 0;
 	}
 	~BaseWeaponStore(){}
 };
@@ -118,7 +123,9 @@ public:
 			return new ShotgunWeaponStore();
 		if(name==3)
 			return new SniperWeaponStore();
+		return 0;
     }
     ~StoreManager();
 };
+
 #endif
