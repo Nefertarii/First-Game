@@ -124,19 +124,19 @@ public:
 	{
 		switch(choose)
 		{
-		case 1:
+		case 5:
 			return new Bullet_Kin();
 			break;
-		case 2:
+		case 6:
 			return new ShootGun_Kin();
 			break;
-		case 3:
+		case 7:
 			return new Sniper_shell();
 			break;
-		case 4:
+		case 8:
 			return new Pinhead();
 			break;
-		case 5:
+		case 9:
 			return new Gun_Nut();
 			break;
 		}

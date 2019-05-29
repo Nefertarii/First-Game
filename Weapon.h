@@ -4,14 +4,14 @@
 class Weapon{
 protected:
 	int Price;
-	int ATK;//Attack
+	int ATK;
 	int AMMO;
 	int Now_AMMO;
 	char Rank;
 	std::string Name;
 
 public:
-	Weapon(int price=0,int atk=0,int ammo=120,int now_ammo=120,char rank='N',std::string name="Initial"){
+	Weapon(int price=0,int atk=5,int ammo=120,int now_ammo=120,char rank='N',std::string name="Initial"){
 		Price=price;
 		ATK=atk;
 		AMMO=ammo;
@@ -26,6 +26,7 @@ public:
 	char Get_Rank() { return Rank; }
 	int Fire() { return Now_AMMO -= 1; }
 	std::string Get_Name() { return Name; }
+	void Reaload() { Now_AMMO = AMMO; }
 	virtual ~Weapon(){}
 };
 
@@ -101,6 +102,23 @@ public:
 	        char rank = 'S', std::string name = "Railgun") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
 	~Railgun(){}
 };
-
+class PilotGun:public Weapon{//sn
+public:
+	PilotGun(int price = 0, int atk = 5, int ammo = 6,int now_ammo = 6,
+	        char rank = 'N', std::string name = "Pilot") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~PilotGun(){}
+};
+class HunterGun:public Weapon{//sn
+public:
+	HunterGun(int price = 0, int atk = 5, int ammo = 8,int now_ammo = 8,
+	        char rank = 'N', std::string name = "Hunter") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~HunterGun(){}
+};
+class CriminalGun:public Weapon{//sn
+public:
+	CriminalGun(int price = 0, int atk = 5, int ammo = 10,int now_ammo = 10,
+	        char rank = 'N', std::string name = "Criminal") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~CriminalGun(){}
+};
 
 #endif

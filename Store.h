@@ -87,6 +87,24 @@ public:
 	}
 	~SniperWeaponStore(){}
 };
+
+class BaseWeaponStore:public WeaponStore{
+public:
+	void Show(){}
+	Weapon *CreatWeapon(int flag)
+	{
+		switch(flag)
+		{
+		case 1:
+			return new PilotGun();break;
+		case 2:
+			return new HunterGun();break;
+		case 3:
+			return new CriminalGun();break;
+		}
+	}
+	~BaseWeaponStore(){}
+};
 class StoreManager{
 public:
     void Show(){
