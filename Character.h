@@ -1,7 +1,7 @@
 #ifndef CHARACTER_H_
 #define CHARACTER_H_
 #include "Weapon.h"
-#include <iostream>	
+#include <iostream>
 class Character{
 protected:
 	std::string CharacterName;
@@ -11,7 +11,7 @@ protected:
 	int Money;
 	Weapon *Equie_Weapon;
 public:
-	Character(std::string character="none",int health=100,int atk=0,int def=0,int money=0){
+	Character(std::string character="none",int health=30,int atk=0,int def=0,int money=0){
 		CharacterName=character;
 		Health=health;
 		ATK=atk;
@@ -24,25 +24,31 @@ public:
 	int Get_ATK() { return ATK; }
 	int Get_DEF() { return DEF; }
 	int Get_Money() { return Money; }
+	int Get_Money(int number) { return Money += number; }
 	Weapon* Get_Weapon(){return Equie_Weapon;}
-	void GetWeapon(Weapon *Now){		
-		Money-=Now->Get_Price() - Equie_Weapon->Get_Price();		//金币减少
-		ATK+=Now->Get_ATK() - Equie_Weapon->Get_ATK();				//攻击力上升
+	void GetWeapon(Weapon *Now){
+		Money -= Now->Get_Price() - Equie_Weapon->Get_Price();
+		ATK += Now->Get_ATK() - Equie_Weapon->Get_ATK();
 		Equie_Weapon=Now;							
 	}
 	void Show_Character(){
 		using namespace std;
 		cout << "\nCharacter: " << CharacterName << endl;
 		cout << "Health: " << Health << endl;
-		cout << "ATK: " << ATK << "  DEF:  " << DEF << " Money: " << Money << endl;
+		cout << "ATK: " << ATK << "\tMoney: " << Money << endl;
 		cout << "\tWeapon\n";
 		cout << "Name: " << Equie_Weapon->Get_Name() << "\tAttack: " << ATK;
 		cout << "\nWeapon Rank: " << Equie_Weapon->Get_Rank() << std::endl;
 		cout << "Ammo: " << Equie_Weapon->Get_Now_AMMO() << "/" << Equie_Weapon->Get_AMMO() << std::endl;
 	}
+	void Show_Monster(){
+		using namespace std;
+		cout << "\nCharacter: " << CharacterName << endl;
+		cout << "Health: " << Health << "\tAttack: " << ATK;
+	}
 	void TakeAttack(int Damage){
 		if(Damage>DEF)
-			Health=Health-Damage+DEF;
+			Health -= Damage;
 		if(Health<0)
 			Health=0;
 	}
@@ -54,20 +60,19 @@ public:
 
 class Pilot:public Character{
 public:
-    Pilot(std::string character = "Pilot", int health = 100, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+    Pilot(std::string character = "Pilot", int health = 30, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
     ~Pilot() {}
 };
-class Pilot1:public Character{
+class Hunter:public Character{
 public:
-	Pilot1(std::string character = "Pilot", int health = 100, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
-	~Pilot1(){}
+	Hunter(std::string character = "Hunter", int health = 30, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	~Hunter(){}
 };
-class Pilot2:public Character{
+class Criminal:public Character{
 public:
-	Pilot2(std::string character = "Pilot", int health = 100, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
-	~Pilot2(){}
+	Criminal(std::string character = "Criminal", int health = 30, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	~Criminal(){}
 };
-
 class CreatCharacter{
 public:
 	Character *creatcharacter(int choose)
@@ -78,10 +83,61 @@ public:
 			return new Pilot();
 			break;
 		case 2:
-			return new Pilot1();
+			return new Hunter();
 			break;
 		case 3:
-			return new Pilot2();
+			return new Criminal();
+			break;
+		}
+	}
+};
+
+
+class Bullet_Kin:public Character{
+public:
+	Bullet_Kin(std::string character = "Bullet Kin", int health = 25, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	~Bullet_Kin(){}
+};
+class ShootGun_Kin:public Character{
+public:
+	ShootGun_Kin(std::string character = "ShootGun Kin", int health = 40, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	~ShootGun_Kin(){}
+};
+class Sniper_shell:public Character{
+public:
+	Sniper_shell(std::string character = "Sniper shell", int health = 25, int atk = 10, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	~Sniper_shell(){}
+};
+class Pinhead:public Character{
+public:
+	Pinhead(std::string character = "Pinhead", int health = 20, int atk = 20, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	~Pinhead(){}
+};
+class Gun_Nut:public Character{
+public:
+	Gun_Nut(std::string character = "Gun Nut", int health = 80, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	~Gun_Nut(){}
+};
+class CreatMonster{
+public:
+	Character *creatmonster(int choose)
+	{
+		switch(choose)
+		{
+		case 1:
+			return new Bullet_Kin();
+			break;
+		case 2:
+			return new ShootGun_Kin();
+			break;
+		case 3:
+			return new Sniper_shell();
+			break;
+		case 4:
+			return new Pinhead();
+			break;
+		case 5:
+			return new Gun_Nut();
 			break;
 		}
 	}

@@ -14,23 +14,23 @@ class PistolWeaponStore:public WeaponStore{
 public:
 	void Show()
 	{
-		cout<<"1."<<endl;
-		cout<<"2."<<endl;
-		cout<<"3."<<endl;
-		cout<<"4."<<endl;
+		cout<<"1.Name:Rogue\tPrice:20\n"<<endl;
+		cout<<"2.Name:M1911\tPrice:25\n"<<endl;
+		cout<<"3.Name:Trank Gun\tPrice:25\n"<<endl;
+		cout<<"4.Name:Dungeon Eagle\tPrice:30\n"<<endl;
 	}
 	Weapon *CreatWeapon(int flag)
 	{
 		switch(flag)
 		{
 		case 1:
-			return new Pistol1();break;
+			return new Rogue();break;
 		case 2:
-			return new Pistol2();break;
+			return new M1911();break;
 		case 3:
-			return new Pistol3();break;
+			return new Trank_Gun();break;
 		case 4:
-			return new Pistol4();break;
+			return new Dungeon_Eagle();break;
 		}
 	}
 	~PistolWeaponStore(){}
@@ -40,23 +40,23 @@ class ShotgunWeaponStore:public WeaponStore{
 public:
 	void Show()
 	{
-		cout<<"1."<<endl;
-		cout<<"2."<<endl;
-		cout<<"3."<<endl;
-		cout<<"4."<<endl;
+		cout<<"1.Name:Regular Shotgun\tPrice:25\n"<<endl;
+		cout<<"2.Name:Winchester\tPrice:30\n"<<endl;
+		cout<<"3.Name:Huntsman\tPrice:35\n"<<endl;
+		cout<<"4.Name:Big Shotgun\tPrice:50\n"<<endl;
 	}
 	Weapon *CreatWeapon(int flag)
 	{
 		switch(flag)
 		{
 		case 1:
-			return new Shotgun1();break;
+			return new Regular_Shotgun();break;
 		case 2:
-			return new Shotgun2();break;
+			return new Winchester();break;
 		case 3:
-			return new Shotgun3();break;
+			return new Huntsman();break;
 		case 4:
-			return new Shotgun4();break;
+			return new Big_Shotgun();break;
 		}
 	}
 	~ShotgunWeaponStore(){}
@@ -66,23 +66,23 @@ class SniperWeaponStore:public WeaponStore{
 public:
 	void Show()
 	{
-		cout<<"1."<<endl;
-		cout<<"2."<<endl;
-		cout<<"3."<<endl;
-		cout<<"4."<<endl;
+		cout<<"1.Name:M1\tPrice:30\n"<<endl;
+		cout<<"2.Name:A.W.P\tPrice:36\n"<<endl;
+		cout<<"3.Name:Heaxgun\tPrice:40\n"<<endl;
+		cout<<"4.Name:Railgun\tPrice:75\n"<<endl;
 	}
 	Weapon *CreatWeapon(int flag)
 	{
 		switch(flag)
 		{
 		case 1:
-			return new Sniper1();break;
+			return new M1();break;
 		case 2:
-			return new Sniper2();break;
+			return new A_W_P();break;
 		case 3:
-			return new Sniper3();break;
+			return new Heaxgun();break;
 		case 4:
-			return new Sniper4();break;
+			return new Railgun();break;
 		}
 	}
 	~SniperWeaponStore(){}

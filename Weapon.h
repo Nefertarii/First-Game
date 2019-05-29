@@ -11,7 +11,7 @@ protected:
 	std::string Name;
 
 public:
-	Weapon(int price=0,int atk=0,int ammo=0,int now_ammo=0,char rank='N',std::string name="none"){
+	Weapon(int price=0,int atk=0,int ammo=120,int now_ammo=120,char rank='N',std::string name="Initial"){
 		Price=price;
 		ATK=atk;
 		AMMO=ammo;
@@ -24,81 +24,82 @@ public:
 	int Get_AMMO() { return AMMO; }
 	int Get_Now_AMMO() { return Now_AMMO; }
 	char Get_Rank() { return Rank; }
+	int Fire() { return Now_AMMO -= 1; }
 	std::string Get_Name() { return Name; }
 	virtual ~Weapon(){}
 };
 
-class Pistol1:public Weapon{
+class Rogue:public Weapon{//p
 public:
-	Pistol1(int price = 100, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'C', std::string name = "Pistol1") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Pistol1(){}
+	Rogue(int price = 20, int atk = 10, int ammo = 300,int now_ammo = 300,
+	        char rank = 'C', std::string name = "Rogue") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Rogue(){}
 };
-class Pistol2:public Weapon{
+class M1911:public Weapon{//p
 public:
-	Pistol2(int price = 200, int atk = 20, int ammo = 80,int now_ammo = 80,
-	        char rank = 'B', std::string name = "Pistol2") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Pistol2(){}
+	M1911(int price = 25, int atk = 20, int ammo = 240,int now_ammo = 240,
+	        char rank = 'B', std::string name = "M1911") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~M1911(){}
 };
-class Pistol3:public Weapon{
+class Trank_Gun:public Weapon{//p
 public:
-	Pistol3(int price = 300, int atk = 30, int ammo = 100,int now_ammo = 100,
-	        char rank = 'A', std::string name = "Pistol3") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Pistol3(){}
+	Trank_Gun(int price = 25, int atk = 30, int ammo = 150,int now_ammo = 150,
+	        char rank = 'A', std::string name = "Trank Gun") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Trank_Gun(){}
 };
-class Pistol4:public Weapon{
+class Dungeon_Eagle:public Weapon{//p
 public:
-	Pistol4(int price = 400, int atk = 40, int ammo = 120,int now_ammo = 120,
-	        char rank = 'S', std::string name = "Pistol4") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Pistol4(){}
+	Dungeon_Eagle(int price = 30, int atk = 40, int ammo = 120,int now_ammo = 120,
+	        char rank = 'S', std::string name = "Dungeon Eagle") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Dungeon_Eagle(){}
 };
-class Shotgun1:public Weapon{
+class Regular_Shotgun:public Weapon{//st
 public:
-	Shotgun1(int price = 100, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'C', std::string name = "Shotgun1") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Shotgun1(){}
+	Regular_Shotgun(int price = 25, int atk = 5, int ammo = 120,int now_ammo = 120,
+	        char rank = 'C', std::string name = "Regular Shotgun") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Regular_Shotgun(){}
 };
-class Shotgun2:public Weapon{
+class Winchester:public Weapon{//st
 public:
-	Shotgun2(int price = 100, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'B', std::string name = "Shotgun2") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Shotgun2(){}
+	Winchester(int price = 30, int atk = 8, int ammo = 80,int now_ammo = 80,
+	        char rank = 'B', std::string name = "Winchester") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Winchester(){}
 };
-class Shotgun3:public Weapon{
+class Huntsman:public Weapon{//st
 public:
-	Shotgun3(int price = 100, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'A', std::string name = "Shotgun3") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Shotgun3(){}
+	Huntsman(int price = 35, int atk = 10, int ammo = 50,int now_ammo = 50,
+	        char rank = 'A', std::string name = "Huntsman") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Huntsman(){}
 };
-class Shotgun4:public Weapon{
+class Big_Shotgun:public Weapon{//st
 public:
-	Shotgun4(int price = 100, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'S', std::string name = "Shotgun4") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Shotgun4(){}
+	Big_Shotgun(int price = 50, int atk = 15, int ammo = 80,int now_ammo = 80,
+	        char rank = 'S', std::string name = "Big Shotgun") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Big_Shotgun(){}
 };
-class Sniper1:public Weapon{
+class M1:public Weapon{//sn
 public:
-	Sniper1(int price = 200, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'C', std::string name = "Sniper1") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Sniper1(){}
+	M1(int price = 30, int atk = 30, int ammo = 80,int now_ammo = 50,
+	        char rank = 'B', std::string name = "M1") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~M1(){}
 };
-class Sniper2:public Weapon{
+class A_W_P:public Weapon{//sn
 public:
-	Sniper2(int price = 300, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'B', std::string name = "Sniper2") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Sniper2(){}
+	A_W_P(int price = 34, int atk = 45, int ammo = 40,int now_ammo = 30,
+	        char rank = 'B', std::string name = "A.W.P") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~A_W_P(){}
 };
-class Sniper3:public Weapon{
+class Heaxgun:public Weapon{//sn
 public:
-	Sniper3(int price = 500, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'A', std::string name = "Sniper3") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Sniper3(){}
+	Heaxgun(int price = 42, int atk = 60, int ammo = 40,int now_ammo = 25,
+	        char rank = 'A', std::string name = "Heaxgun") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Heaxgun(){}
 };
-class Sniper4:public Weapon{
+class Railgun:public Weapon{//sn
 public:
-	Sniper4(int price = 1000, int atk = 10, int ammo = 50,int now_ammo = 50,
-	        char rank = 'S', std::string name = "Sniper4") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
-	~Sniper4(){}
+	Railgun(int price = 75, int atk = 100, int ammo = 50,int now_ammo = 50,
+	        char rank = 'S', std::string name = "Railgun") : Weapon(price,atk,ammo,now_ammo,rank,name) {}
+	~Railgun(){}
 };
 
 
