@@ -39,7 +39,7 @@ public:
 		cout << "\tWeapon\n";
 		cout << "Name: " << Equie_Weapon->Get_Name() << "\tAttack: " << ATK;
 		cout << "\nWeapon Rank: " << Equie_Weapon->Get_Rank() << std::endl;
-		cout << "Ammo: " << Equie_Weapon->Get_Now_AMMO() << "/" << Equie_Weapon->Get_AMMO() << std::endl;
+		cout << "Ammo: " << Equie_Weapon->Get_Now_AMMO() << "/" << Equie_Weapon->Get_Magazine() << std::endl;
 	}
 	void Show_Monster(){
 		using namespace std;
@@ -47,7 +47,7 @@ public:
 		cout << "Health: " << Health << "\tAttack: " << ATK;
 	}
 	void TakeAttack(int Damage){
-			Health -= Damage;
+		Health -= Damage;
 		if(Health<0)
 			Health=0;
 	}

@@ -23,31 +23,43 @@ bool Game_Over = false;
 bool Have_store = false;
 bool CanFire = true;
 StoreManager *Total_Store = nullptr;
+PistolWeaponStore Pistol;
+SniperWeaponStore Sniper;
+ShotgunWeaponStore Shotgun;
 Weapon *My_Weapon = nullptr;
 Character *player1 = nullptr;
+Character *Monster = nullptr;
 CreatCharacter My_CreatCharacter;
 int choose;
 int Input(){
     
     return Int_choose;
 }
-int Rand(){
+int Random(){
     int happen = rand() % 10;
     return happen;
 }
-int Monster_Rand(){
+int Monster_Random(){
     int Monster = rand() % 5 + 5;
     return Monster;
 }
+void Monster_Attack(){
+    if(Monster_Random() == 5){
+    player1->TakeAttack(Monster->Get_ATK());
+    cout << "You taking " << Monster->Get_ATK() << " Damege!";
+    cout << "Yout health: " << player1->Get_Health() << endl;
+    cout << endl;
+    }
+}
 void Fight(){
-    Character *Monster = nullptr;
     CreatMonster Monster_CreatCharacter;
-    Monster = Monster_CreatCharacter.creatmonster(Monster_Rand());
+    Monster = Monster_CreatCharacter.creatmonster(Monster_Random());
     cout << "This is its property:\n";
     Monster->Show_Monster();
     cout << "\n1.Attack\t2.Move\n"
     <<"*(If you move while the monster is attacking will not loss of health).\nYour choose: ";
     while(Monster->Get_Health()!=0){
+        //Input
         while (1){
             cin >> Int_choose;
             if(!cin){
@@ -63,77 +75,105 @@ void Fight(){
 	    }
         switch (Int_choose){
         case 1:{
-            Monster->TakeAttack(player1->Get_ATK());
-            cout << "You used \" " << My_Weapon->Get_Name() << "\" caused " << player1->Get_ATK() << " Damage.";
-            cout << Monster->Get_Character() << " have " << Monster->Get_Health() << " health.\n";
-            if(Monster_Rand() == 5){
+            if(My_Weapon->Get_Now_AMMO()>0){
+                Monster->TakeAttack(player1->Get_ATK());
+                cout << "You used \"" << My_Weapon->Get_Name() << "\" caused " << My_Weapon->Get_ATK() << " Damage.";
+                cout << Monster->Get_Character() << " now have " << Monster->Get_Health() << " health.\n";
+                //enemy attack
+                Monster_Attack();
+                if (player1->Get_Health() == 0){
+                    Game_Over = true;
+                    goto Gameover;
+                }
+                cout << endl;
+                My_Weapon->Fire();
+                cout << "Next choose: ";
+            }
+            else{
+                cout << "Not Ammo.\n";
+                if(Monster_Random() == 5){
                 player1->TakeAttack(Monster->Get_ATK());
                 cout << "You taking " << Monster->Get_ATK() << " Damege!";
-                cout << "Yout health: " << player1->Get_Health();
+                cout << "Yout health: " << player1->Get_Health() << endl;
                 cout << endl;
+                } 
             }
-            My_Weapon->Fire();
-            cout << "Next choose: ";
             break;
-    }
+        }
         case 2:{
-            if (Monster_Rand() == 5){
+            if (Monster_Random() == 5){
                 cout << "You dodge the attack!\tVery nice.\n";
             }
             else
                 cout << "Nothing is happen.\tThe monster did not attack.\n";
             cout << "Next choose: ";
             break;
-    }
+        }
         case 3:{
-            cout << "Readload now..." << endl;
-            CanFire = true;
-            My_Weapon->Reaload();
+            My_Weapon->Reload();
+            Monster_Attack();
+            if (player1->Get_Health() == 0){
+                Game_Over = true;
+                goto Gameover;
+            }
+            else
+                continue;
+        }
+        }
+        if(player1->Get_Health()==0){
+            Gameover:break;
     }
     Round++;
     Met_Monster++;
-    }
-    }//fight choose
-    if(player1->Get_Health()==0)
+    }//battle end
+    if(player1->Get_Health()==0){
+        cout << "\n\n\nYou died.\n";
         Game_Over = true;
-    cout << "\n\n\nBattle is end."
+    }
+    if(Game_Over==true){
+        system("cls");
+        cout << "Your health is 0!\n"
+             << Monster->Get_Character() << " kill you.";
+        cout << "Enter Esc to quit.\n";
+    }
+    else{
+    cout << "\n\t\tBattle is end."
          << "You kill: " << Monster->Get_Character()
          << endl;
-    int Get = rand() % 5;
-    cout << "Monster dorps " <<Get<<" Money "<< endl;
-    player1->Get_Money(Get);
+    int Drop = rand() % 5;
+    cout << "Monster dorps " <<Drop<<" Money "<< endl;
+    player1->Get_Money(Drop);
     cout << "The game has been played for " << Round << " rounds." << endl;
     cout << "Please ESC to quit.Use the arrow keys to operate.\n";
-    delete Monster;
+    }
 }
-
 void WeaponStore(){
-        Total_Store->Show();
-        cout<<"\t0.Back"<<endl;
-        bool quit = false;
-        while(quit!=true){
-		cout<<"Choose: "<<endl;
-        while (1){
-            cin >> Int_choose;
-            if(!cin){
-			cin.clear();				
-			cin.sync();					
-			cout<<"Input error,please enter again!\n"<<endl;
-			continue;
-		    }
-		    if(Int_choose!=0&&Int_choose!=1&&Int_choose!=2&&Int_choose!=3)
-		    cout<<"Not this type weapon!\n"<<endl;
-            if(Int_choose==0)
-                break;
-        }
+    Total_Store->Show();
+    cout<<"\t0.Back"<<endl;
+    bool quit = false;
+    while(quit!=true){
+	cout<<"Choose: "<<endl;
+    while (1){
+        cin >> Int_choose;
+        if(!cin){
+		cin.clear();				
+		cin.sync();					
+		cout<<"Input error,please enter again!\n"<<endl;
+		continue;
+		}
+		if(Int_choose!=0&&Int_choose!=1&&Int_choose!=2&&Int_choose!=3)
+		cout<<"Not this type weapon!\n"<<endl;
+        else
+            break;
+    }
         switch(Int_choose){
         case 0:{
+            cout<<"Not this type Store!\n"<<endl;
             break;
         }
         case 1:{
-            PistolWeaponStore Pistol;
             Pistol.Show();
-            cout<<"Choose "<<endl;
+            cout<<"Choose: "<<endl;
             int Temp_choose;
             while (1){
                 cin >> Temp_choose;
@@ -143,9 +183,13 @@ void WeaponStore(){
 		    	cout<<"Input error,please enter again!\n"<<endl;
 		    	continue;
 	    	    }
-		        if(Temp_choose!=1&&Temp_choose!=2&&Temp_choose!=3)
+		        if(Temp_choose!=0&&Temp_choose!=1&&Temp_choose!=2&&Temp_choose!=3&&Temp_choose!=4)
 		        cout<<"Not this type weapon!\n"<<endl;
-                if(Temp_choose==0)
+                if(Temp_choose==0){
+                    cout << "Quit.\n";
+                    goto Quit;
+                }
+                else
                     break;
             }
             if(player1->Get_Money()>=(Pistol.CreatWeapon(Temp_choose))->Get_Price()) 
@@ -161,11 +205,9 @@ void WeaponStore(){
                 break;
             }
             quit = true;
-            Have_store = false;
             break;
         };
         case 2:{
-            ShotgunWeaponStore Shotgun;
             Shotgun.Show();
             cout<<"Choose "<<endl;
             int Temp_choose;
@@ -178,9 +220,13 @@ void WeaponStore(){
 		    	cout<<"Input error,please enter again!\n"<<endl;
 		    	continue;
 	    	    }
-		        if(Temp_choose!=1&&Temp_choose!=2&&Temp_choose!=3)
+		        if(Temp_choose!=0&&Temp_choose!=1&&Temp_choose!=2&&Temp_choose!=3&&Temp_choose!=4)
 		        cout<<"Not this type weapon!\n"<<endl;
-                if(Temp_choose==0)
+                if(Temp_choose==0){
+                    cout << "Quit.\n";
+                    goto Quit;
+                }
+                else
                     break;
             }
             if(player1->Get_Money()>=(Shotgun.CreatWeapon(Temp_choose))->Get_Price())  
@@ -196,11 +242,10 @@ void WeaponStore(){
                 break;
             }
             quit = true;
-            Have_store = false;
             break;
         };
         case 3:{
-            SniperWeaponStore Sniper;
+
             Sniper.Show();
             cout<<"Choose "<<endl;
             int Temp_choose;
@@ -212,9 +257,13 @@ void WeaponStore(){
 		    	cout<<"Input error,please enter again!\n"<<endl;
 		    	continue;
 	    	    }
-		        if(Temp_choose!=1&&Temp_choose!=2&&Temp_choose!=3)
+		        if(Temp_choose!=0&&Temp_choose!=1&&Temp_choose!=2&&Temp_choose!=3&&Temp_choose!=4)
 		        cout<<"Not this type weapon!\n"<<endl;
-                if(Temp_choose==0)
+                if(Temp_choose==0){
+                    cout << "Quit.\n";
+                    goto Quit;
+                }
+                else
                     break;
             }
             if(player1->Get_Money()>=(Sniper.CreatWeapon(Temp_choose))->Get_Price())  
@@ -230,13 +279,10 @@ void WeaponStore(){
                 break;
             }
             quit = true;
-            Have_store = false;
             break;
         };
         }
-		player1->GetWeapon(My_Weapon);
-        Have_store = false;
-        break;
+        Quit:break;
     }
 }
 void Game_Judge(){
@@ -246,8 +292,7 @@ void Game_Judge(){
     else if (player1->Get_Health()==0)
         Game_Over = true;
 }
-using namespace std;
-int main(){
+void Start(){
     cout << "Welcome.";
     cout << "Game Max round is:" << Max_Round << endl;
     cout << "1.Pilot, health = 30, Weaponatk = 5\n";
@@ -272,11 +317,16 @@ int main(){
     player1 = My_CreatCharacter.creatcharacter(choose);
     BaseWeaponStore Base;
     My_Weapon = Base.CreatWeapon(choose);
+    player1->GetWeapon(My_Weapon);
     player1->Show_Character(); 
+}
+using namespace std;
+int main(){
+    Start();
     int Int_choose;
     string String_choose;
     while(Game_Over!=true){
-	cout<<"Gamecontinue! "<<"\n1.Move\n2.Show\n3.quit"<<endl;
+	cout<<"Game continue! "<<"\n1.Move\n2.Show\n3.quit"<<endl;
     cout << "The game has been played for " << Round << " rounds." << endl;
 	while(1){
 			cin>>Int_choose;
@@ -299,10 +349,15 @@ int main(){
             switch(ch)
             {
             case 224:
+        if(Game_Over==true){
+            ch = 27;
+            cout << "Enter Esc to quit.\n";
+            break;
+        }
     switch(ch=getch()){
            case 72:{
                cout << ("UP\n");
-               int Temp = Rand();
+               int Temp = Random();
                if(Temp==1||Temp==2||Temp==3||Temp==4){
                    if(Met_Monster==Max_Monster){
                goto Empty_Up;
@@ -315,7 +370,6 @@ int main(){
                goto Empty_Up;
                    }
                    cout << "You met a Weapon dealer!\n";
-                   Have_store = true;
                    WeaponStore();
                    Met_Store++;
                    Round++;
@@ -342,7 +396,7 @@ int main(){
 
            case 80:{
                 cout<<("DOWN\n");
-                int Temp = Rand();
+                int Temp = Random();
                 if(Temp==1){
                    cout << "You met a monster!\n";
                    Fight();
@@ -377,7 +431,7 @@ int main(){
             }
            case 75:{  
                cout<<("LEFT\n");
-               int Temp = Rand();
+               int Temp = Random();
                if(Temp==1){
                    cout << "You met a monster!\n";
                    Fight();
@@ -412,7 +466,7 @@ int main(){
             }
            case 77:{  
                cout<<("RIGHT\n");
-               int Temp = Rand();
+               int Temp = Random();
                if(Temp==1){
                    cout << "You met a monster!\n";
                    Fight();
@@ -457,8 +511,8 @@ int main(){
     break;
     }		
     case 2:{			//?? back
-    player1->Show_Character();
-    break;
+        player1->Show_Character();
+        break;
     }
     case 3:{
         string temp;
@@ -470,6 +524,7 @@ int main(){
     }//case 3
     }//switch(Int_choose)
     }//while(Game_Over!=true)
-    cout << "\n\n\nGame is Over.\nThanks for play.";
+    system("cls");
+    cout << "\t\tGame is Over.Thanks for play.";
     system("pause");
 }
