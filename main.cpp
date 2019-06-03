@@ -1,27 +1,12 @@
-#include "Armor.h"
 #include "Character.h"
 #include "Store.h"
 #include "Weapon.h"
+#include "Define.h"
 #include <iostream>
 #include <stdio.h>
 #include <cstdlib>
 #include <conio.h>
 #include <ctime>
-int Max_Round = rand() % 100 + 50;
-int Max_Monster = rand() % 5 + 10;//10
-int Max_Case = 2;//2
-int Max_Store = 1;//1
-int Empty_Room=rand() % 1 + 2;//3
-int Round = 0;
-int Met_EmptyRoom = 0;
-int Met_Monster = 0;
-int Met_Case = 0;
-int Met_Store = 0;
-int Int_choose = 0;
-int Count = 0;
-bool Game_Over = false;
-bool Have_store = false;
-bool CanFire = true;
 StoreManager *Total_Store = nullptr;
 PistolWeaponStore Pistol;
 SniperWeaponStore Sniper;
@@ -51,8 +36,11 @@ void Monster_Attack(){
     cout << endl;
     }
 }
-void Fight(){
+void Fight(int numbers){
     CreatMonster Monster_CreatCharacter;
+    if(numbers==10){
+        Monster = Monster_CreatCharacter.creatmonster(10);
+    }
     Monster = Monster_CreatCharacter.creatmonster(Monster_Random());
     cout << "This is its property:\n";
     Monster->Show_Monster();
@@ -123,8 +111,6 @@ void Fight(){
         if(player1->Get_Health()==0){
             Gameover:break;
     }
-    Round++;
-    Met_Monster++;
     }//battle end
     if(player1->Get_Health()==0){
         cout << "\n\n\nYou died.\n";
@@ -133,7 +119,7 @@ void Fight(){
     if(Game_Over==true){
         system("cls");
         cout << "Your health is 0!\n"
-             << Monster->Get_Character() << " kill you.";
+             << Monster->Get_Character() << " kill you.\n";
         cout << "Enter Esc to quit.\n";
     }
     else{
@@ -143,6 +129,8 @@ void Fight(){
     int Drop = rand() % 5;
     cout << "Monster dorps " <<Drop<<" Money "<< endl;
     player1->Get_Money(Drop);
+    Round++;
+    Met_Monster++;
     cout << "The game has been played for " << Round << " rounds." << endl;
     cout << "Please ESC to quit.Use the arrow keys to operate.\n";
     }
@@ -320,6 +308,21 @@ void Start(){
     player1->GetWeapon(My_Weapon);
     player1->Show_Character(); 
 }
+void Case(){
+    if(Random()==5){
+        player1->TakeAttack(-10);
+    }
+    else if(Random()==6||Random()==7){
+        player1->Get_Money(Random());
+    }
+    else if(Random()==8){
+        cout << "Oh this is a Box Monster";
+        Fight(10);
+    }
+    else {
+        cout << "It's a empty case.";
+    }
+}
 using namespace std;
 int main(){
     Start();
@@ -363,7 +366,7 @@ int main(){
                goto Empty_Up;
                    }
                    cout << "You met a monster!\n";
-                   Fight();
+                   Fight(0);
                 }
                else if(Temp==5){
                    if(Met_Store==Max_Store){
@@ -388,6 +391,7 @@ int main(){
                    }
                    cout << "It's a Room .\nThere a case in the room!\n";
                    Met_Case++;
+                   Case();
                    Round++;
                    Game_Judge();
                }
@@ -399,7 +403,7 @@ int main(){
                 int Temp = Random();
                 if(Temp==1){
                    cout << "You met a monster!\n";
-                   Fight();
+                   Fight(0);
                }
                else if(Temp==5){
                    if(Met_Store==Max_Store){
@@ -424,6 +428,7 @@ int main(){
                    }
                    cout << "It's a Room .\nThere a case in the room!\n";
                    Met_Case++;
+                   Case();
                    Round++;
                    Game_Judge();
                }
@@ -434,7 +439,7 @@ int main(){
                int Temp = Random();
                if(Temp==1){
                    cout << "You met a monster!\n";
-                   Fight();
+                   Fight(0);
                }
                else if(Temp==5){
                    if(Met_Store==Max_Store){
@@ -459,6 +464,7 @@ int main(){
                    }
                    cout << "It's a Room .\nThere a case in the room!\n";
                    Met_Case++;
+                   Case();
                    Round++;
                    Game_Judge();
                }
@@ -469,7 +475,7 @@ int main(){
                int Temp = Random();
                if(Temp==1){
                    cout << "You met a monster!\n";
-                   Fight();
+                   Fight(0);
                }
                else if(Temp==5){
                    if(Met_Store==Max_Store){
@@ -494,6 +500,7 @@ int main(){
                    }
                    cout << "It's a Room .\nThere a case in the room!\n";
                    Met_Case++;
+                   Case();
                    Round++;
                    Game_Judge();
                }
@@ -525,6 +532,6 @@ int main(){
     }//switch(Int_choose)
     }//while(Game_Over!=true)
     system("cls");
-    cout << "\t\tGame is Over.Thanks for play.";
+    cout << "Game is Over.Thanks for play.\n";
     system("pause");
 }

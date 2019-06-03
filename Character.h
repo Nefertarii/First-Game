@@ -59,17 +59,17 @@ public:
 
 class Pilot:public Character{
 public:
-    Pilot(std::string character = "Pilot", int health = 30, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+    Pilot(std::string character = "Pilot", int health = 40, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
     ~Pilot() {}
 };
 class Hunter:public Character{
 public:
-	Hunter(std::string character = "Hunter", int health = 30, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	Hunter(std::string character = "Hunter", int health = 35, int atk = 7, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
 	~Hunter(){}
 };
 class Criminal:public Character{
 public:
-	Criminal(std::string character = "Criminal", int health = 30, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	Criminal(std::string character = "Criminal", int health = 30, int atk = 8, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
 	~Criminal(){}
 };
 class CreatCharacter{
@@ -115,8 +115,13 @@ public:
 };
 class Gun_Nut:public Character{
 public:
-	Gun_Nut(std::string character = "Gun Nut", int health = 80, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	Gun_Nut(std::string character = "Gun Nut", int health = 40, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
 	~Gun_Nut(){}
+};
+class Case_monster:public Character{
+public:
+	Case_monster(std::string character = "Suprise", int health = 40, int atk = 5, int def = 0, int money = 0) : Character(character, health, atk, def, money){}
+	~Case_monster(){}
 };
 class CreatMonster{
 public:
@@ -138,6 +143,9 @@ public:
 			break;
 		case 9:
 			return new Gun_Nut();
+			break;
+		case 10:
+			return new Case_monster();
 			break;
 		}
 		return 0;
